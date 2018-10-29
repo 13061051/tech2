@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts.js案例一</title>
+    <script type="text/javascript" src='/static/echarts.min.js'></script>
+    <script type="text/javascript" src='/static/echarts-wordcloud.min.js'></script>
+</head>
+<body>
+    <table align="center" width="1000" height="1200" border=0 bordercolor="#00ff99">
+<tbody>
+<tr>
+    <td height="30" colspan="5" align="center" border=1 bordercolor="#00ff99">
+        <div id="title">
+          
+        </div>
+    </td>
+</tr>
+<tr>
+    <td colspan="5" width="1000" height="200" align="center";>
+        <table align="center" width="800" height="120" border=0 bordercolor="gray" cellspacing="1">
+            <tr >
+                <td height="120" align="center" >
+                    <div>
+                        人才培养
+                    </div>
+                    <div id="compare1" style="width:120px;height:120px;"></div>
+                </td>
+                <td height="120" align="center">
+                    <div>
+                        人才引进
+                    </div>
+                    <div id="compare2" style="width:120px;height:120px;"></div>
+                </td>
+                <td height="120" align="center">
+                    <div>
+                        人才待遇
+                    </div>
+                    <div id="compare3" style="width:120px;height:120px;"></div>
+                </td>
+                <td height="120" align="center">
+                    <div>
+                        科研成果
+                    </div>
+                    <div id="compare4" style="width:120px;height:120px;"></div>
+                </td>
+                <td height="120" align="center">
+                    <div>
+                        项目基金
+                    </div>
+                    <div id="compare5" style="width:120px;height:120px;"></div>
+                </td>
+            </tr>
+
+        </table>>
+    
+    </td>
+</tr>
+
+<tr>
+    <td rowspan="3" align="center">
+        <div id="citylist" style="width: 200px;height: 800px;">
+        </div>
+    </td>
+    <td colspan="5" width="800" height="400" align="center";>
+        <div id="zheiantu" style="width: 800px;height: 400px;">
+        </div>
+    </td>
+    
+</tr>
+
+<tr>
+    <td colspan="1" align="center">
+        <div id="asd" style="width: 200px;height: 400px;text-align:center;">
+               <p>
+                <font  size="6">
+                    相关新闻   
+                </font>
+                
+               </p> 
+        </div>
+    </td>
+
+    <td colspan="4" align="left">
+        <div id="news" style="width: 600px;height: 400px;">
+
+        </div>
+    </td>
+    
+</tr>
+
+</tbody>
+</table>
+    
+</body>
+<script type="text/javascript">
+function DrawCircle(chartid,name,value_){
+    var dataStyle = {
+        normal: {
+            label: {show:false},
+            labelLine: {show:false}
+        }
+    };
+    var placeHolderStyle = {
+        normal : {
+            color: 'rgba(0,1,0,0)',
+            label: {show:false},
+            labelLine: {show:false}
+        },
+        emphasis : {
+        color: 'rgba(0,0,0,0)'
+        }
+    };
+var option = {
+    
+    title: {
+        text: value_,
+        x: 'center',
+        y: 'center',
+        itemGap: 20,
+        textStyle : {
+            color : 'rgba(30,144,255,0.8)',
+            fontFamily : '微软雅黑',
+            fontSize : 12,
+            fontWeight : 'bolder'
+        }
+    },
+
+    tooltip : {
+        show: true,
+        formatter: "{a} <br/>{b} : {c} ({d})"
+    },
+    series : [
+        {
+            name:name,
+            type:'pie',
+            clockWise:false,
+            radius : [40, 60],
+            itemStyle : dataStyle,
+            data:[
+                {
+                    value:value_,
+                    name:name
+                },
+                {
+                    value:100-value_,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+            ]
+        }
+    ]
+    
+};
+                        
+var myChart = echarts.init(document.getElementById(chartid));
+myChart.setOption(option);
+}
+function DrawZhexiantu(chartid,title,names,x1,y1,y2,y3,y4,y5){
+
+    var option = {
+    title : {
+        text: title,
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:names
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : x1
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            axisLabel : {
+                formatter: '{value}'
+            }
+        }
+    ],
+    series : [
+        {
+            name:names[0],
+            type:'line',
+            data:y1,
+        },
+        {
+            name:names[1],
+            type:'line',
+            data:y2
+        },
+         {
+            name:names[2],
+            type:'line',
+            data:y3
+        },
+         {
+            name:names[3],
+            type:'line',
+            data:y4
+        },
+         {
+            name:names[4],
+            type:'line',
+            data:y5
+        }
+    ]
+};
+	var myChart = echarts.init(document.getElementById(chartid));
+	myChart.setOption(option);
+}
+var index_={{index|safe}};
+//var index_=[99,100,99,100,89];
+DrawCircle("compare1","人才培养",index_[0]);
+DrawCircle("compare2","人才引进",index_[1]);
+DrawCircle("compare3","人才待遇",index_[2]);
+DrawCircle("compare4","科研成果",index_[3]);
+DrawCircle("compare5","项目基金",index_[4]);
+var y1=[11,21,91];
+var y2=[31,12,13];
+var y3=[12,52,33];
+var y4=[41,23,38];
+var y5=[21,52,31];
+DrawZhexiantu("zheiantu","科技发展指数",["人才培养","人才引进","人才待遇","科研成果","项目基金"],["2016","2017","2018"],y1,y2,y3,y4,y5);
+
+//新闻
+var titles={{title|safe}};
+var news_num=titles.length;
+var times={{time|safe}}
+var urls={{url|safe}}
+for(var i=0;i<news_num;i++){
+    var node=document.createElement("div");
+    var textnode=document.createElement("a");
+    textnode.href=urls[i];
+    textnode.text=titles[i];
+    
+    /*
+    pnode=document.createElement("p");
+    var textnode2=document.createTextNode(brief[i]);
+    pnode.appendChild(textnode2);
+	*/
+
+    timenode=document.createElement("p");
+    var textnode3=document.createTextNode(times[i]);
+    timenode.appendChild(textnode3);
+    
+    node.appendChild(textnode);
+    node.appendChild(timenode)
+    //node.appendChild(pnode);
+    
+                //将node里面获取的子节点 添加到mylisf1里面
+    document.getElementById("news").appendChild(node);
+}
+
+//城市
+cities={{provinces|safe}};
+cities_length=cities.length;
+for (var i=0;i<cities_length;i++){
+    
+    
+    var node=document.createElement("div");
+    var linknode=document.createElement("a");
+    linknode.href="/tech_personel?city="+cities[i];
+    
+    var btn=document.createElement("BUTTON");
+    var textnode2=document.createTextNode(cities[i]);
+    btn.appendChild(textnode2)
+    btn.setAttribute("style","background-color: #7ED321;width: 76px;height: 36px;color: #FFFFFF")
+
+    linknode.appendChild(btn);
+    node.appendChild(linknode);
+    
+
+
+                //将node里面获取的子节点 添加到mylisf1里面
+    document.getElementById("citylist").appendChild(node);
+}
+//标题
+var cityname={{city|safe}};
+var textnode2=document.createTextNode(cityname+"科技人才");
+//textnode2.setAttribute("style","background-color: #7ED321; color: #FFFFFF");
+document.getElementById("title").appendChild(textnode2);
+</script>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计报告界面</title>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
+    <style>
+        body {
+        font-family: PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+        font-size: 14px;
+    }
+        .page-title{
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+        margin: 50px 0;
+        font-size: 24px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container:fluid">
+        <h1 class="page-title">统计报告</h1>
+        <div class="row">
+            <div class="col-6">
+                <!-- 中国地图 热力图 -->
+                <div class="flex-fill" id="js-heatmap">
+
+                </div>
+                <!-- 四个统计图表 -->
+                <div class="card">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="circle-wrap">
+                                <div id="js-circle-1" class="circle"></div>
+                                <p style="text-align: center">会议论文成果</p>
+                                <div id="main1" style="width: 200px;height:100px;margin:0 auto"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="circle-wrap">
+                                <div id="js-circle-2" class="circle"></div>
+                                <p style="text-align: center">产业专利成果</p>
+                                <div id="main2" style="width: 200px;height:100px;margin:0 auto"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="circle-wrap">
+                                <div id="js-circle-3" class="circle"></div>
+                                <p style="text-align: center">人才引进项目</p>
+                                <div id="main3" style="width: 200px;height:100px;margin:0 auto"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="circle-wrap">
+                                <div id="js-circle-4" class="circle"></div>
+                                <p style="text-align: center">高科技产值</p>
+                                <div id="main4" style="width: 200px;height:100px;margin:0 auto"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <script>
+                //会议论文成果静态数据
+                var hylwcg_data = [
+                {value:21,itemStyle: { color: '#FFFFFF' }},
+                {value:79,itemStyle: { color: '#2828FF' }},  //百分比
+            ];
+                 // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('main1'));
+        // 指定图表的配置项和数据
+        option1 = {
+    series: [
+        {
+            name:['会议论文成果'],
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'center',
+                    formatter: "{d}",
+                    textStyle: {
+                        fontSize: '20',
+                        fontWeight: 'normal'
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '20',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: hylwcg_data
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart1.setOption(option1);
+
+        //产业专利成果 静态数据
+             var cyzlcg_data = [
+                {value:38,itemStyle: { color: '#FFFFFF' }},
+                {value:62,itemStyle: { color: '#8F4586' }},  //百分比
+            ]
+         // 基于准备好的dom，初始化echarts实例
+        var myChart2 = echarts.init(document.getElementById('main2'));
+        // 指定图表的配置项和数据
+        option2 = {
+    series: [
+        {
+            name:['产业专利成果'],
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'center',
+                    formatter: "{d}",
+                    textStyle: {
+                        fontSize: '20',
+                        fontWeight: 'normal'
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '20',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: cyzlcg_data
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+
+        //人才引进项目 静态数据
+                var rcyjxm_data = [
+                {value:7,itemStyle: { color: '#FFFFFF' }},
+                {value:93,itemStyle: { color: '#73BF00' }},     //百分比
+            ];
+         // 基于准备好的dom，初始化echarts实例
+        var myChart3 = echarts.init(document.getElementById('main3'));
+        // 指定图表的配置项和数据
+        option3 = {
+    series: [
+        {
+            name:['人才引进项目'],
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'center',
+                    formatter: "{d}",
+                    textStyle: {
+                        fontSize: '20',
+                        fontWeight: 'normal'
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '20',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: rcyjxm_data
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart3.setOption(option3);
+
+        //高科技产值 静态数据
+             var gkjcz_data = [
+                {value:23,itemStyle: { color: '#FFFFFF' }},
+                {value:77,itemStyle: { color: '#CC0000' }},   //百分比
+            ]
+         // 基于准备好的dom，初始化echarts实例
+        var myChart4 = echarts.init(document.getElementById('main4'));
+        // 指定图表的配置项和数据
+        option4 = {
+    series: [
+        {
+            name:['高科技产值'],
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'center',
+                    formatter: "{d}",
+                    textStyle: {
+                        fontSize: '20',
+                        fontWeight: 'normal'
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '20',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: gkjcz_data
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart4.setOption(option4);
+            </script>
+
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">发展趋势</div>
+                    <div class="card-body">
+                        <div id="main5" style="width: 600px;height:400px;margin:0 auto"></div>
+                    </div>
+                </div>
+
+                <script>
+                    //发展趋势折线图 静态数据
+                    var hylwcg = [71, 75, 79, 81, 83, 79];  //会议论文成果 2013-2018
+                    var cyzlcg = [43, 47, 46, 51, 58, 62];  //产业专利成果 2013-2018
+                    var rcyjxm = [82, 83, 81, 69, 81, 93];  //人才引进项目 2013-2018
+                    var gkjcz =  [64, 65, 68, 71, 73, 77];  //高科技产值   2013-2018
+// 基于准备好的dom，初始化echarts实例
+        var myChart5 = echarts.init(document.getElementById('main5'));
+        // 指定图表的配置项和数据
+          option5 = {
+    tooltip:{
+                    trigger: 'item',
+                    formatter: "{a} ({b}):<br> {c} "
+            },
+    legend: {
+                data:['会议论文成果','产业专利成果','人才引进项目','高科技产值']
+            },
+    xAxis: {
+        type: 'category',
+        data: ['2013', '2014', '2015', '2016', '2017', '2018']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: hylwcg,
+        type: 'line',
+        name: '会议论文成果',
+        itemStyle: { color: '#2828FF' }
+    },
+    {
+        data: cyzlcg,
+        type: 'line',
+        name: '产业专利成果',
+        itemStyle: { color: '#8F4586' }
+    },
+    {
+        data: rcyjxm,
+        type: 'line',
+        name: '人才引进项目',
+        itemStyle: { color: '#73BF00' }
+    },
+    {
+        data: gkjcz,
+        type: 'line',
+        name: '高科技产值',
+        itemStyle: { color: '#CC0000' }
+    }]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart5.setOption(option5);
+                </script>
+
+                <br>
+
+                <div class="card">
+                    <div class="card-header">关联性分析</div>
+                    <div class="card-body">
+                        <div id="main6" style="width: 600px;height:400px;margin:0 auto"></div>
+                    </div>
+                </div>
+                <script>
+                    //关联性分析 静态数据 由于需要做成双向箭头，所以每两个节点之间有两个连线，但只有一条连线上有value属性 by CZY
+                    var guanlianxing_data = [{
+                source: '会议论文成果',
+                target: '人才引进项目',
+            },{
+                source: '人才引进项目',
+                target: '会议论文成果',
+                value: '0.24',
+                label: {
+                    normal: {
+                        show: true,
+                        formatter:'{@value}'
+                    }
+                }
+            },{
+                source: '会议论文成果',
+                target: '产业专利成果',
+            },{
+                source: '产业专利成果',
+                target: '会议论文成果',
+                value: '0.86',
+                label: {
+                    normal: {
+                        show: true,
+                        formatter:'{@value}'
+                    }
+                }
+            },{
+                source: '会议论文成果',
+                target: '高科技产值'
+            },{
+                source: '高科技产值',
+                target: '会议论文成果',
+                value: '0.63',
+                label: {
+                    normal: {
+                        show: true,
+                        formatter:'{@value}'
+                    }
+                }
+            },{
+                source: '人才引进项目',
+                target: '产业专利成果'
+            },{
+                source: '产业专利成果',
+                target: '人才引进项目',
+                value: '0.86',
+                label: {
+                    normal: {
+                        show: true,
+                        formatter:'{@value}'
+                    }
+                }
+            },{
+                source: '高科技产值',
+                target: '产业专利成果'
+            },{
+                source: '产业专利成果',
+                target: '高科技产值',
+                value: '0.47',
+                label: {
+                    normal: {
+                        show: true,
+                        formatter:'{@value}'
+                    }
+                }
+            }]
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart6 = echarts.init(document.getElementById('main6'));
+                    // 指定图表的配置项和数据
+       option6 = {
+    tooltip: {},
+    animationDurationUpdate: 1500,
+    animationEasingUpdate: 'quinticInOut',
+    series : [
+        {
+            type: 'graph',
+            layout: 'none',
+            symbolSize: 80,
+            roam: true,
+            label: {
+                normal: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 15
+                    }
+                }
+            },
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [4, 10],
+            edgeLabel: {
+                normal: {
+                    textStyle: {
+                        fontSize: 25
+                    }
+                }
+            },
+            data: [{                                  //此处data 存储的是四个节点的信息，不需要进行改动 by CZY
+                name: '会议论文成果',
+                x: 300,
+                y: 300,
+                 itemStyle:{
+                    color: '#2828FF'
+                }
+            }, {
+                name: '产业专利成果',
+                x: 800,
+                y: 300,
+                 itemStyle:{
+                    color: '#8F4586'
+                }
+            }, {
+                name: '人才引进项目',
+                x: 550,
+                y: 100,
+                itemStyle:{
+                    color: '#73BF00'
+                }
+            }, {
+                name: '高科技产值',
+                x: 550,
+                y: 500,
+                itemStyle:{
+                    color: '#CC0000'
+                }
+            }],
+            // links: [],
+            links: guanlianxing_data,           //静态数据
+            lineStyle: {
+                normal: {
+                    opacity: 2.0,
+                    width: 3,
+                    curveness: 0
+                }
+            }
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart6.setOption(option6);
+                </script>
+            </div>
+    </div>
+    </div>
+</body>
+</html>

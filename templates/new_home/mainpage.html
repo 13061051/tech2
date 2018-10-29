@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- 引入 Bootstrap css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+
+    <!-- 引入 jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <!-- 引入 Bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <!-- 引入 echarts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.1.0/dist/echarts.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@4.3.0/dist/css/swiper.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@4.3.0/dist/js/swiper.min.js"></script>
+
+
+    <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="/static/css/new_home.css">
+    <script src="/static/js/graph.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/人工智能@2.5.16/dist/人工智能.min.js"></script>
+    <title>科技知识与数据中心</title>
+
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_869571_kzcnpmxc7h8.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left -->
+            <div class="col-4 px-3">
+                <h4 style="padding:5%;color: #ccc">科技人才培养
+                    <a href="/public_opinion.html" class="float-right jump-to-btn"><i class="iconfont icon-fanhui"></i></a>
+                </h4>
+                <div class="vh-40 py-2" id="people" >
+                    <!-- 科技舆情 -->
+
+                </div>
+
+                <div class="vh-60 pb-2">
+                    <h4 style="padding:5%;color: #ccc">科学领域热点
+                    <a href="/people.html" class="float-right jump-to-btn"><i class="iconfont icon-fanhui"></i></a>
+                    </h4>
+                    <div class="box h-60 " id="domain">
+                    </div>
+                </div>
+            </div>
+
+            <!-- middle -->
+            <div class="col-4 px-0">
+                <!-- top logi -->
+                <div class="vh-15 py-2">
+                    <div class="box h-100  title-box">
+                        <img src="/static/img/logo.png" class="title-box_logo">
+                    </div>
+                </div>
+
+                <!-- map -->
+                <div class="vh-60 pb-2">
+                            <div class="card-body d-flex h-100 p-0 position-relative">
+                                <div class="map-btn-section">
+                                    <button class="btn btn-outline-info btn-sm js-btn-china mr-3">国内</button>
+                                    <button class="btn btn-outline-info btn-sm js-btn-world">国际</button>
+                                </div>
+                                <div class="flex-fill main-map" id="main-map"></div>
+                    </div>
+                </div>
+                <div class="vh-25">
+                                <div class="box h-100" id="trend"></div>
+                </div>
+            </div>
+            <!-- right -->
+            <div class="col-4 px-3">
+                <h4 style="padding:5%;color: #ccc">研发机构现状
+                    <a href="/public_opinion.html" class="float-right jump-to-btn"><i class="iconfont icon-fanhui"></i></a>
+                </h4>
+                <div class="vh-40 py-2" id="institute" >
+                    <!-- 科技舆情 -->
+
+                </div>
+
+                <div class="vh-60 pb-2">
+                    <h4 style="padding:5%;color: #ccc">产业动态趋势
+                    <a href="/people.html" class="float-right jump-to-btn"><i class="iconfont icon-fanhui"></i></a>
+                    </h4>
+                    <div class="box h-60 " id="product">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="/static/js/china.js"></script>
+<script src="/static/js/world.js"></script>
+<script src="/static/js/map.js"></script>
+<script src="/static/js/mainpage.js"></script>
+
+<script>
+    var ChinaData = null;
+    var worldData = null;
+    $.getJSON('/static/data/middle_data/lunwen/guonei_lunwen.json', function (data) {
+                ChinaData = data;
+                 $('.js-btn-china').click();
+            });
+            $.getJSON('/static/data/middle_data/lunwen/guoji_lunwen.json', function (data) {
+                worldData = data;
+            });
+    var peopleChart = echarts.init(document.getElementById("people"));
+    var domainChart = echarts.init(document.getElementById("domain"));
+    var trendChart = echarts.init(document.getElementById("trend"));
+    var instituteChart= echarts.init(document.getElementById("institute"));
+    var productChart= echarts.init(document.getElementById("product"));
+   //回调函数
+    function onAreaClick(areaName, year){
+
+        var newoption = {title: {
+        text: "全国"},};
+        peopleChart.hideLoading();
+        peopleChart.setOption({ //载入数据
+						title: {
+							text: areaName //填入数据
+						}
+
+					});
+        fetchZhishu().then(([guonei, guoji]) => {
+            if(guonei[year] && guonei[year][areaName]){
+                let data = guonei[year][areaName];
+                drawCircle(data);
+            }else if(guoji[year] && guoji[year][areaName]){
+                let data = guoji[year][areaName];
+                drawCircle(data);
+            }
+        });
+    }
+
+
+    function drawMap(mapType){
+        let sourceDate = mapType == 'china' ? ChinaData : worldData;
+        let data = {};
+        for(let year = 2014; year <= 2018; year++){
+            data['' + year] = sourceDate['' + year];
+        }
+
+        $('#main-map').drawMap({
+            mapType: mapType,
+            data: data,
+            onAreaClick: onAreaClick
+        });
+    }
+
+    $('.js-btn-china').on('click', function () {
+        drawMap('china');
+
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+    });
+
+    $('.js-btn-world').on('click', function () {
+        drawMap('world');
+
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+    });
+
+    //$('.js-btn-china').first().click();
+
+    // onAreaClick('北京', '2018');
+
+
+
+    peopleChart.setOption(people_option);
+    domainChart.setOption(domain_option);
+    trendChart.setOption(trend_option);
+    instituteChart.setOption(inst_option);
+    productChart.setOption(product_option);
+</script>
+
+</html>

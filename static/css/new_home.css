@@ -1,0 +1,405 @@
+html,body{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-image: url(/static/img/nybj.png);
+    color: #fff;
+    font-family: PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+    min-width: 1300px;
+    font-size: 14px;
+}
+
+
+.jump-to-btn{
+    color: #999;
+    text-decoration: none;
+}
+
+.jump-to-btn:hover{
+    color: #fff;
+    text-decoration: none;
+}
+
+
+[v-cloak] {
+    visibility: hidden;
+}
+
+.vh-15{
+    height: 15vh;
+}
+.vh-25{
+    height: 25vh;
+}
+.vh-40{
+    height: 40vh;
+}
+.vh-50{
+    height: 50vh;
+}
+.vh-60{
+    height: 60vh;
+}
+.vh-85{
+    height: 85vh;
+}
+
+.h-20{
+    height: 20%;
+}
+.h-30{
+    height: 30%;
+}
+
+.h-35{
+    height: 35%;
+}
+.h-40{
+    height: 40%;
+}
+.h-60{
+    height: 60%;
+}
+.h-70{
+    height: 70%;
+}
+
+.page-title{
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    margin: 50px 0;
+    font-size: 24px;
+}
+
+
+.box .card {
+    border-color: transparent;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+
+.box .card-header {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    font-size: 16px;
+}
+
+/* title-box */
+
+.title-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-box_logo{
+    max-width: 90%;
+    max-height: 90%
+}
+
+
+/* people-box */
+
+.people-box__domain-list{
+    display: flex;
+    justify-content: space-between;
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+
+.people-box__domain-list-item{
+    font-size: 12px;
+    width: 90%;
+}
+
+
+.people-box .domain-list-swiper .swiper-slide{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.people-box__people-info {
+    height: 100%;
+    text-align: center;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.people-box__people-info img{
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 100%;
+}
+
+.people-box__people-name {
+    font-size: 14px;
+    line-height: 14px;
+    height: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+}
+
+.people-box__people-description {
+    overflow: hidden;
+    color: #ccc;
+    text-align: left;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    line-height: 1.4em;
+    height: 2.8em;
+
+}
+
+
+/* map view */
+
+.main-map{
+
+}
+
+/* common */
+
+
+
+.public-opinion-swiper{
+    /* width: 100%;
+    height: 100%; */
+}
+
+.public_opinion_event{
+    margin: 0 10px;
+    padding: 15px 0;
+    border-bottom: 1px solid #444;
+}
+
+.public_opinion_event .user-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.public_opinion_event .user-info .user-avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: 1px solid #ccc;
+}
+
+.public_opinion_event .user-info .user-name{
+    font-size: 14px;
+    line-height: 1.6em;
+    height: 1.6em;
+    color: yellow;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+}
+
+.public_opinion_event .user-discription{
+    font-size: 12px;
+    line-height: 14px;
+    height: 28px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #bbb;
+}
+
+.public_opinion_event .event-content{
+    display: -webkit-box;
+    overflow: hidden;
+    text-align: left;
+    color: #ddd;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-bottom: 10px;
+}
+
+.public_opinion_event .event-date{
+    font-size: 12px;
+    color: #bbb;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.public_opinion_event .tag-list{
+    margin-bottom: 10px;
+}
+
+.public_opinion_event .tag{
+    color: yellow;
+    font-size: 12px;
+    border-radius: 3px;
+    border: 1px solid;
+    padding: 1px 5px;
+    display: inline-block;
+    margin-right: .2rem;
+    transform-origin: left top;
+    transform: scale(0.8);
+}
+
+
+
+
+
+/* scholar */
+
+
+
+.img-wrap {
+    text-align: center;
+    padding: 10px 0 0 0;
+}
+
+.img-wrap img {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+
+/* map */
+
+.map-btn-section{
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    z-index: 1000;
+    left: 0;
+    text-align: center;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.circle-wrap {
+    text-align: center;
+}
+
+/* industry-activity */
+
+.industry-activity .tab-list{
+    flex-shrink: 0;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.industry-activity .tab-list .btn{
+    height: 30px;
+}
+
+.industry-activity .news-list {
+    padding: 10px 0;
+    flex-grow: 1;
+    font-size: 12px;
+}
+
+.industry-activity .news {
+    padding: 10px 0;
+    border-bottom: 1px solid #444;
+}
+
+.industry-activity .news .title{
+    font-size: 16px;
+    color: yellow;
+}
+
+.industry-activity .news .info{
+    color: #ddd;
+}
+
+.industry-activity .news .content{
+    margin: 0;
+    color: #ddd;
+}
+
+
+
+/* trend */
+
+.trend-box{
+    padding: 0.5rem 1.25rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.trend-box .chart-type__tab{
+    padding: 20px 0;
+    width: 30px;
+    max-width: 100%;
+}
+
+.chart-type__tab-item{
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+}
+
+.chart-type__tab-item.active{
+    border: 1px solid #303F9F; 
+}
+
+.trend-box__graph-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* swiper */
+.swiper-button-prev,
+.swiper-button-next{
+    background: none;
+    position: absolute;
+    top: 50%;
+    font-size: 40px;
+    outline: none;
+    color: #bbb;
+}
+.swiper-button-prev{
+    left: 0px;
+}
+.swiper-button-next{
+    right: 0px;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover{
+    color: #fff;
+}
+
+.js-industry-activity-swiper-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>热点学术研究</title>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
+    <script src="/static/echarts-wordcloud.min.js"></script>
+    <
+    <style>
+        body {
+        font-family: PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+        font-size: 14px;
+    }
+        .page-title{
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+        margin: 50px 0;
+        font-size: 24px;
+    }
+        .area_name{
+            text-align: center;
+            font-size: 20px
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+            <h1 class="page-title">热点学术研究</h1>
+        <!-- 年份 -->
+            <div class="btn-group">
+                <h6>&#12288&#12288&#12288&#12288年份：</h6>
+                <button type="button" class="btn btn-primary">2013</button>
+                <button type="button" class="btn btn-primary">2014</button>
+                <button type="button" class="btn btn-primary">2015</button>
+                <button type="button" class="btn btn-primary">2016</button>
+                <button type="button" class="btn btn-primary">2017</button>
+                <button type="button" class="btn btn-primary">2018</button>
+            </div>
+
+        <!-- 领域分类部分-->
+            <div class="btn-group">
+                <h6>热点学术领域：</h6>
+                <button type="button" class="btn btn-primary">人工智能</button>
+                <button type="button" class="btn btn-primary">信息安全</button>
+                <button type="button" class="btn btn-primary">数据挖掘</button>
+                <button type="button" class="btn btn-primary">遗传算法</button>
+                <button type="button" class="btn btn-primary">神经网络</button>
+                <button type="button" class="btn btn-primary">专家系统</button>
+                <button type="button" class="btn btn-primary">自然语言处理</button>
+            </div>
+    <br>
+    <br>
+
+            <div class="card">
+                <div class="card-body">
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <p style="text-align: center">学术发展程度</p>
+                            <div id="main1" style="width: 300px;height: 200px;margin:0 auto"></div>
+                        </div>
+
+                        <div class="col-4">
+                            <p style="text-align: center">成果丰硕程度</p>
+                            <div id="main2" style="width: 300px;height: 200px;margin:0 auto"></div>
+                        </div>
+
+                        <div class="col-4">
+                            <p style="text-align: center">社会影响程度</p>
+                            <div id="main3" style="width: 300px;height: 200px;margin:0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+     <script>
+         //学术发展程度 静态数据
+         var xueshufazhan_data;
+         xueshufazhan_data = [
+             {value: 10, itemStyle: {color: '#FFFFFF'}},
+             {value: 90, itemStyle: {color: '#2828FF'}}              //百分比
+         ];
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('main1'));
+        // 指定图表的配置项和数据
+        option1 = {
+    series: [
+        {
+            name:['学术发展程度'],
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'center',
+                    formatter: "{d}",
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'normal'
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: xueshufazhan_data
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart1.setOption(option1);
+
+        //成果丰硕程度 静态数据
+         var chengguofengshuo_data;
+         chengguofengshuo_data = [
+             {value: 30, itemStyle: {color: '#FFFFFF'}},
+             {value: 70, itemStyle: {color: '#01B468'}}         //百分比
+         ];
+        // 基于准备好的dom，初始化echarts实例
+        var myChart2 = echarts.init(document.getElementById('main2'));
+        // 指定图表的配置项和数据
+        option2 = {
+    series: [
+        {
+            name:['成果丰硕程度'],
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'center',
+                    formatter: "{d}",
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'normal'
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: chengguofengshuo_data
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+
+        //社会影响程度 静态数据
+        var shehuiyingxiang_data;
+        shehuiyingxiang_data = [
+                {value:40,itemStyle: { color: '#FFFFFF' }},
+                {value:60,itemStyle: { color: '#CC0000' }}  //百分比
+            ];
+        // 基于准备好的dom，初始化echarts实例
+        var myChart3 = echarts.init(document.getElementById('main3'));
+        // 指定图表的配置项和数据
+        option3 = {
+    series: [
+        {
+            name:['社会影响'],
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'center',
+                    formatter: "{d}",
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'normal'
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: shehuiyingxiang_data
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart3.setOption(option3);
+
+
+
+    </script>
+
+    <br>
+
+    <!-- 词云部分 -->
+    <div class="cloud_graph">
+        <div class="card">
+            <div class="card-header">近几年学术研究热点云图</div>
+            <div class="card-body">
+                 <div id="main4" style="width: 600px;height:400px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //词云的静态数据，名字和权值
+        var ciyun_data = [
+            {
+                name: '人工智能',
+                value: 10000,
+            },
+            {
+                name: '大数据',
+                value: 7000,
+            },
+            {
+                name: '智能穿戴',
+                value: 8000,
+            },
+            {
+                name: '物联网',
+                value: 6000,
+            },
+            {
+                name: '信息安全',
+                value: 11000,
+            },
+            {
+                name: '模式识别',
+                value: 9000,
+            },
+            {
+                name: '设计',
+                value: 6000,
+            },
+            {
+                name: '机械运输',
+                value: 4000,
+            },
+            {
+                name: '基因测序',
+                value: 7000,
+            },
+            {
+                name: '肿瘤',
+                value: 7000,
+            },
+            {
+                name: '分布式计算',
+                value: 8000,
+            }
+            ];
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart4 = echarts.init(document.getElementById('main4'));
+        // 指定图表的配置项和数据
+        option4 = {
+     series: [
+    {
+        type: 'wordCloud',
+        gridSize: 2,
+        sizeRange: [12, 50],
+        rotationRange: [-90, 90],
+        shape: 'pentagon',
+        textStyle: {
+            normal: {
+                color: function () {
+                    return 'rgb(' + [
+                            Math.round(Math.random() * 255),
+                            Math.round(Math.random() * 255),
+                            Math.round(Math.random() * 255)
+                        ].join(',') + ')';
+                }
+            },
+            emphasis: {
+                shadowBlur: 10,
+                shadowColor: '#333'
+            }
+        },
+        data: ciyun_data
+    }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart4.setOption(option4);
+    </script>
+    <br>
+
+    <!-- 折线图、图谱左右分布显示-->
+    <div class="two_graph">
+      <div class="row">
+      <!--折线图-->
+        <div class="col-6">
+          <div class="card">
+            <div class="card-header">变化趋势统计</div>
+              <div class="card-body">
+                  <div id="main5" style="width: 500px;height:400px;"></div>
+              </div>
+          </div>
+        </div>
+
+          <script>
+              //折线图的静态数据
+              var xsfzcd_data = [65, 70, 71, 74, 79, 80];         //学术发展程度 2013-2018
+              var cgfscd_data = [58, 59, 61, 63, 65, 70];         //成果丰硕程度 2013-2018
+              var shyxcd_data = [41, 52, 53, 51, 59, 60];         //社会影响程度 2013-2018
+        // 基于准备好的dom，初始化echarts实例
+        var myChart5 = echarts.init(document.getElementById('main5'));
+        // 指定图表的配置项和数据
+          option5 = {
+    tooltip:{
+                    trigger: 'item',
+                    formatter: "{a} ({b}):<br> {c} "
+            },
+    toolbox: {
+        show: true,
+        feature: {
+            dataView: {
+                show: true,
+                readOnly: true
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        }
+    },
+    legend: {
+                data:['学术发展程度','成果丰硕程度','社会影响程度']
+            },
+    xAxis: {
+        type: 'category',
+        data: ['2013', '2014', '2015', '2016', '2017', '2018']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: xsfzcd_data,
+        type: 'line',
+        name: '学术发展程度',
+        itemStyle: { color: '#2828FF' }
+    },
+    {
+        data: cgfscd_data,
+        type: 'line',
+        name: '成果丰硕程度',
+        itemStyle: { color: '#01B468' }
+    },
+    {
+        data: shyxcd_data,
+        type: 'line',
+        name: '社会影响程度',
+        itemStyle: { color: '#CC0000' }
+    }]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart5.setOption(option5);
+          </script>
+      <!--图谱-->
+        <div class="col-6">
+          <div class="card">
+            <div class="card-header">该领域的热点图谱</div>
+              <div class="card-body">
+                  <div id="main6" style="width: 500px;height:400px;"></div>
+              </div>
+          </div>
+
+            <script>
+                //领域热点图谱的静态数据，包括data和links两个部分，tupu_data存储节点，tupu_links存储边
+                var tupu_data = [{
+            "name": "人工智能",
+            "symbolSize": 20,
+            "draggable": "true",
+            "value": 27
+        }, {
+            "name": "数据挖掘",
+            "value": 3,
+            "symbolSize": 9,
+            "draggable": "true"
+        }, {
+            "name": "遗传算法",
+            "value": 2,
+            "symbolSize": 10,
+            "draggable": "true"
+        }, {
+            "name": "神经网络",
+            "value": 5,
+            "symbolSize": 11,
+            "draggable": "true"
+        }, {
+            "name": "专家系统",
+            "value": 2,
+            "symbolSize": 9,
+            "draggable": "true"
+        }];
+                var tupu_links =  [{
+            "source": "人工智能",
+            "target": "数据挖掘"
+        }, {
+            "source": "人工智能",
+            "target": "遗传算法"
+        }, {
+            "source": "人工智能",
+            "target": "神经网络"
+        }, {
+            "source": "人工智能",
+            "target": "专家系统"
+        }];
+                // 基于准备好的dom，初始化echarts实例
+        var myChart6 = echarts.init(document.getElementById('main6'));
+        // 指定图表的配置项和数据
+        option6 = {
+    tooltip: {},
+    toolbox: {
+        show: true,
+        feature: {
+            dataView: {
+                show: true,
+                readOnly: true
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        }
+    },
+    animationDuration: 3000,
+    animationEasingUpdate: 'quinticInOut',
+    series: [{
+        name: '领域热点图谱',
+        type: 'graph',
+        layout: 'force',
+        force: {
+            repulsion: 3000
+        },
+        data: tupu_data,
+        links: tupu_links,
+        focusNodeAdjacency: true,
+        roam: true,
+        label: {
+            normal: {
+                show: true,
+                position: 'top',
+            }
+        },
+        lineStyle: {
+            normal: {
+                color: 'source',
+                curveness: 0,
+                type: "solid"
+            }
+        }
+    }]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart6.setOption(option6);
+            </script>
+        </div>
+
+
+      </div>
+    </div>
+
+    <br>
+
+    <!-- 学术领袖部分 -->
+    <div class="card">
+        <div class="card-header">该领域的学术领袖</div>
+        <div class="card-body">
+            <div class="row">
+            <div class="col-6">
+                <div id="main7" style="width: 500px;height:400px;"></div>
+
+            </div>
+                <div class="col-6">
+              <table class="table">
+              <!--<thead>-->
+      <!--<tr>-->
+        <!--<th>Firstname</th>-->
+        <!--<th>Lastname</th>-->
+        <!--<th>Email</th>-->
+      <!--</tr>-->
+    <!--</thead>-->
+    <tbody>
+      <tr>
+        <td>
+            <h5>周志华：深度学习为什么深？有多好的人才，才可能有多好的人工智能</h5>
+            <h6>2018-04-16 新智元 </h6>
+            <p>在昨天举行的2018京东人工智能创新峰会上，南京大学计算机系主任、人工智能学院院长周志华教授进行了题为《关于深度学习的思考》的主题演讲。周志华教授提出，人工智能时代最缺的就是人才，因为对这个行业来说，你有多好的人才，才可能有多好的人工智能。</p>
+        </td>
+      </tr>
+      <tr>
+          <td>
+            <h5>周志华：满足这三大条件，可以考虑不用深度神经网络</h5>
+            <h6>2018年04月18日 AI科技大本营</h6>
+            <p>AI科技大本营按：4 月 15 日举办的京东人工智能创新峰会上，刚刚上任京东人工智能南京分院学术总顾问的周志华教授做了《关于深度学习一点思考》的公开分享。 近年来，深度神经网络在语音、图像领域取得突出进展，以至于很多人将深度学习与深度神经网络等同视之。但周志华表示，总结 Kaggle 竞赛中的获奖结果可以发现，神经网络获胜的往往就是在图像、视频、声音这几类典型任务上，而在其它涉及到混合建模、离散建模、符号建模的任务上，相比其他模型就会差一些。 为什么会产生这样的结果？周志华从深度神经网络的深层含义说起，条分缕析地总结出神经网络取得成功的三大原因：
+</p>
+        </td>
+      </tr>
+      <tr>
+          <td>
+            <h5>旷视科技首席科学家孙剑：如何打造云、端、芯上的视觉计算 | CCF-GAIR 2018</h5>
+            <h6>2018-07-07 雷锋网</h6>
+            <p>旷视科技首席科学家、研究院院长孙剑博士为大家带来题为 “云、端、芯上的视觉计算”的精彩演讲。孙剑认为，计算机视觉简单讲就是使机器能看，旷视科技希望能够做到“赋能亿万摄像头”，让应用在所有领域的摄像头都具备智能，不管是在云、端还是在芯上。</p>
+        </td>
+      </tr>
+    </tbody>
+              </table>
+          </div>
+            </div>
+
+        </div>
+    </div>
+
+         <script>
+             //学术领袖 词云 静态数据
+             xueshulingxiu_data = [
+            {
+                name: '周志华',
+                value: 100,
+            },
+            {
+                name: '孙剑',
+                value: 95,
+            },
+            {
+                name: '田奇',
+                value: 85,
+            },
+            {
+                name: '马毅',
+                value: 90,
+            },
+            {
+                name: '宁鹏',
+                value: 75,
+            },
+            {
+                name: '聂飞平',
+                value: 75,
+            },
+            {
+                name: '陶宇飞',
+                value: 65,
+            },
+            {
+                name: '陶大程',
+                value: 55,
+            },
+            {
+                name: '谢幸',
+                value: 55,
+            },
+            {
+                name: '华先胜',
+                value: 70,
+            }
+            ]
+           // 基于准备好的dom，初始化echarts实例
+        var myChart7 = echarts.init(document.getElementById('main7'));
+        // 指定图表的配置项和数据
+        option7 = {
+     series: [
+    {
+        type: 'wordCloud',
+        gridSize: 2,
+        sizeRange: [12, 50],
+        rotationRange: [-90, 90],
+        shape: 'pentagon',
+        textStyle: {
+            normal: {
+                color: function () {
+                    return 'rgb(' + [
+                            Math.round(Math.random() * 160),
+                            Math.round(Math.random() * 160),
+                            Math.round(Math.random() * 160)
+                        ].join(',') + ')';
+                }
+            },
+            emphasis: {
+                shadowBlur: 10,
+                shadowColor: '#333'
+            }
+        },
+        data:xueshulingxiu_data
+    }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart7.setOption(option7);
+          </script>
+
+</div> <!-- container的结束标签 -->
+</body>
+</html>
