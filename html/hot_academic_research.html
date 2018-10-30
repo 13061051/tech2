@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>热点学术研究</title>
+
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -33,7 +33,14 @@
 </head>
 <body>
 <div class="container">
-            <h1 class="page-title">热点学术研究</h1>
+            <div id="title" align="center">
+                <script>
+                    //标题
+                    var field={{provinces|safe}}+"研究";
+                    document.write(field.fontcolor("green").fontsize(6));
+                </script>
+            </div>
+
         <!-- 年份 -->
             <div class="btn-group">
                 <h6>&#12288&#12288&#12288&#12288年份：</h6>
@@ -632,6 +639,11 @@
 
         // 使用刚指定的配置项和数据显示图表。
         myChart7.setOption(option7);
+
+
+
+
+
           </script>
 
 </div> <!-- container的结束标签 -->

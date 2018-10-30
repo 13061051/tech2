@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>echarts.js案例一</title>
+    <title></title>
     <script type="text/javascript" src='/static/echarts.min.js'></script>
     <script type="text/javascript" src='/static/echarts-wordcloud.min.js'></script>
 </head>
@@ -11,9 +11,15 @@
 <tbody>
 <tr>
     <td height="30" colspan="5" align="center" border=1 bordercolor="#00ff99">
-        <div id="title">
-          
-        </div>
+
+            <div id="title" align="center">
+                <script>
+                    //标题
+                    var field={{province|safe}}+"人才培养";
+                    document.write(field.fontcolor("green").fontsize(6));
+                </script>
+            </div>
+
     </td>
 </tr>
 <tr>
@@ -232,11 +238,11 @@ DrawCircle("compare2","先进人才引进",index_[1]);
 DrawCircle("compare3","人才保障支持",index_[2]);
 DrawCircle("compare4","科研成果转化",index_[3]);
 DrawCircle("compare5","项目基金",index_[4]);
-var y1=[11,21,91];
-var y2=[31,12,13];
-var y3=[12,52,33];
-var y4=[41,23,38];
-var y5=[21,52,31];
+var y1=[11,21,index_[0]];
+var y2=[31,12,index_[1]];
+var y3=[12,52,index_[2]];
+var y4=[41,23,index_[3]];
+var y5=[21,52,index_[4]];
 DrawZhexiantu("zheiantu","科技发展指数",["科研人才孵化","先进人才引进","人才保障支持","科研成果转化","项目基金"],["2016","2017","2018"],y1,y2,y3,y4,y5);
 
 //新闻
@@ -291,10 +297,7 @@ for (var i=0;i<cities_length;i++){
                 //将node里面获取的子节点 添加到mylisf1里面
     document.getElementById("citylist").appendChild(node);
 }
-//标题
-var cityname={{city|safe}};
-var textnode2=document.createTextNode(cityname+"科技人才");
-//textnode2.setAttribute("style","background-color: #7ED321; color: #FFFFFF");
-document.getElementById("title").appendChild(textnode2);
+
+
 </script>
 </html>

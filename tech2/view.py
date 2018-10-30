@@ -32,6 +32,90 @@ location2province,provinces=getLocation()
 def sortByTime(info):
     return info['time']
 
+import json
+import xlrd
+def getProvinceZhuanlinum(sheetindex):
+    workbook = xlrd.open_workbook('data/data3.xlsx')
+    sheet_names= workbook.sheet_names()
+    sheet=workbook.sheet_by_index(sheetindex)
+    cols=sheet.ncols
+    rows=sheet.nrows
+    province2num={}
+    for i in range(1,rows):
+        province=sheet.cell(i,0).value
+        nums=sheet.row_values(i)[1:5]
+        nums=[int(num) for num in nums]
+        province2num[province]=nums
+    return province2num
+
+def getProvinceIndex(sheetindex):
+    province2num=getProvinceZhuanlinum(sheetindex)
+    provincenum=[]
+    def sortBySecond(info):
+        return info[1]
+    for info in province2num:
+        num=province2num[info][3]
+        provincenum.append([info,num])
+
+    provincenum.sort(key=sortBySecond)
+    short_cut = (int)(len(provincenum) / 5);
+    province_index = []
+    province2index = {}
+    #
+    for i in range(5):
+        if i < 4:
+            ps = provincenum[i * short_cut:i * short_cut + short_cut]
+            min = ps[0][1]
+            max = ps[short_cut - 1][1]
+            for p in ps:
+                if max-min==0:
+                    province = p[0]
+                    index = (20 * i) + 5
+                    index = int(index)
+                    if index < 10:
+                        index = index + 5
+                    if index > 100:
+                        index = 100
+                    province2index[province] = index
+                else:
+                    province = p[0]
+                    index = (20 * i) + (((p[1] - min) / (max - min)) * 20)
+                    index = int(index)
+                    if index < 10:
+                        index = index + 5
+                    if index > 100:
+                        index = 100
+                    if index==100:
+                        print(ps)
+                    province2index[province] = index
+                    province_index.append([province, index])
+        else:
+            ps = provincenum[i * short_cut:len(provincenum)]
+            min = ps[0][1]
+            max = ps[len(provincenum) - (i*short_cut)-1][1]
+            for p in ps:
+                if max - min == 0:
+                    province = p[0]
+                    index = (20 * i) + 5
+                    index = int(index)
+                    if index < 10:
+                        index = index + 5
+                    if index > 100:
+                        index = 100
+                    province2index[province] = index
+                else:
+                    province = p[0]
+                    index = (20 * i) + (20 * ((p[1] - min) / (max - min)))
+                    index = int(index)
+                    if index < 10:
+                        index = index + 5
+                    if index > 100:
+                        index = 100
+                    if index==100:
+                        print(ps)
+                    province2index[province] = index
+                    province_index.append([province, index])
+    return province2index
 def tech_personnel(request):
     with open("data/news2.json", 'r', encoding='utf-8') as load_f:
         load_dict = json.load(load_f)
@@ -49,14 +133,51 @@ def tech_personnel(request):
     data.reverse()
     news=data
     index_1=(province2num[city]/province2num['广东'])*100
-    if index_1<10:
-        index_1=index_1+5
-    if index_1>100:
-        while index_1>100:
-            index_1=index_1-5
-    index_1=(int)(index_1)
-    context={'city':"'"+city+"'"}
-    context['index']=[91,index_1,82,91,90]
+    province_nums=[]
+    for province in provinces:
+        province_nums.append([province,province2num[province]])
+    def sortBySecond(info):
+        return info[1]
+    province_nums.sort(key=sortBySecond)
+    short_cut=(int)(len(province_nums)/5);
+    province_index=[]
+    province2index={}
+
+    for i in range(5):
+        if i<4:
+            ps=province_nums[i*short_cut:i*short_cut+short_cut]
+            min=ps[0][1]
+            max=ps[short_cut-1][1]
+            for p in ps:
+                province=p[0]
+                index=(20*i)+(((p[1]-min)/(max-min))*20)
+                index = int(index)
+                if index < 10:
+                    index= index+ 5
+                if index >100:
+                    index=100
+                province2index[province]=index
+                province_index.append([province,index])
+        else:
+            ps = province_nums[i * short_cut:len(province_nums)]
+            min = ps[0][1]
+            max = ps[short_cut - 1][1]
+            for p in ps:
+                province = p[0]
+                index = (20 * i) + (20*((p[1] - min) / (max - min)))
+                index=int(index)
+                if index < 10:
+                    index= index+ 5
+                if index >100:
+                    index=100
+                province2index[province] = index
+                province_index.append([province, index])
+    # 专利指数
+    province2index2 =getProvinceIndex(0)
+    #基金指数
+    province2index3 = getProvinceIndex(1)
+    context={'province':"'"+city+"'"}
+    context['index']=[91,province2index[city],82,province2index2[city],province2index3[city]]
     context['provinces']=provinces
     titles=[]
     times=[]
@@ -82,6 +203,9 @@ def tech_personnel(request):
 def report(request):
     return render(request, 'statistical_report.html')
 def hot_academic(request):
-    return render(request, 'hot_academic_research.html')
+    word=request.GET.get('field')
+    context={}
+    context['field']="'"+word+"'"
+    return render(request, 'hot_academic_research.html',context)
 def Index(request):
     return render(request, 'new_home/mainpage.html')
