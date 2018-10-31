@@ -36,8 +36,9 @@
             <div id="title" align="center">
                 <script>
                     //标题
-                    var field={{provinces|safe}}+"研究";
-                    document.write(field.fontcolor("green").fontsize(6));
+                    document.write("热门学术研究   ".fontcolor("green").fontsize(8));
+                    var field={{field|safe}};
+                    document.write(field.fontcolor("blue").fontsize(4));
                 </script>
             </div>
 
@@ -89,6 +90,7 @@
      <script>
          //学术发展程度 静态数据
          var xueshufazhan_data;
+         
          xueshufazhan_data = [
              {value: 10, itemStyle: {color: '#FFFFFF'}},
              {value: 90, itemStyle: {color: '#2828FF'}}              //百分比
@@ -246,53 +248,7 @@
 
     <script>
         //词云的静态数据，名字和权值
-        var ciyun_data = [
-            {
-                name: '人工智能',
-                value: 10000,
-            },
-            {
-                name: '大数据',
-                value: 7000,
-            },
-            {
-                name: '智能穿戴',
-                value: 8000,
-            },
-            {
-                name: '物联网',
-                value: 6000,
-            },
-            {
-                name: '信息安全',
-                value: 11000,
-            },
-            {
-                name: '模式识别',
-                value: 9000,
-            },
-            {
-                name: '设计',
-                value: 6000,
-            },
-            {
-                name: '机械运输',
-                value: 4000,
-            },
-            {
-                name: '基因测序',
-                value: 7000,
-            },
-            {
-                name: '肿瘤',
-                value: 7000,
-            },
-            {
-                name: '分布式计算',
-                value: 8000,
-            }
-            ];
-
+        var ciyun_data={{wordcloud|safe}};
         // 基于准备好的dom，初始化echarts实例
         var myChart4 = echarts.init(document.getElementById('main4'));
         // 指定图表的配置项和数据
