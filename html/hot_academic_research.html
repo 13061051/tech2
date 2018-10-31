@@ -523,40 +523,12 @@
 
             </div>
                 <div class="col-6">
-              <table class="table">
-              <!--<thead>-->
-      <!--<tr>-->
-        <!--<th>Firstname</th>-->
-        <!--<th>Lastname</th>-->
-        <!--<th>Email</th>-->
-      <!--</tr>-->
-    <!--</thead>-->
-    <tbody>
-      <tr>
-        <td>
-            <h5>周志华：深度学习为什么深？有多好的人才，才可能有多好的人工智能</h5>
-            <h6>2018-04-16 新智元 </h6>
-            <p>在昨天举行的2018京东人工智能创新峰会上，南京大学计算机系主任、人工智能学院院长周志华教授进行了题为《关于深度学习的思考》的主题演讲。周志华教授提出，人工智能时代最缺的就是人才，因为对这个行业来说，你有多好的人才，才可能有多好的人工智能。</p>
-        </td>
-      </tr>
-      <tr>
-          <td>
-            <h5>周志华：满足这三大条件，可以考虑不用深度神经网络</h5>
-            <h6>2018年04月18日 AI科技大本营</h6>
-            <p>AI科技大本营按：4 月 15 日举办的京东人工智能创新峰会上，刚刚上任京东人工智能南京分院学术总顾问的周志华教授做了《关于深度学习一点思考》的公开分享。 近年来，深度神经网络在语音、图像领域取得突出进展，以至于很多人将深度学习与深度神经网络等同视之。但周志华表示，总结 Kaggle 竞赛中的获奖结果可以发现，神经网络获胜的往往就是在图像、视频、声音这几类典型任务上，而在其它涉及到混合建模、离散建模、符号建模的任务上，相比其他模型就会差一些。 为什么会产生这样的结果？周志华从深度神经网络的深层含义说起，条分缕析地总结出神经网络取得成功的三大原因：
-</p>
-        </td>
-      </tr>
-      <tr>
-          <td>
-            <h5>旷视科技首席科学家孙剑：如何打造云、端、芯上的视觉计算 | CCF-GAIR 2018</h5>
-            <h6>2018-07-07 雷锋网</h6>
-            <p>旷视科技首席科学家、研究院院长孙剑博士为大家带来题为 “云、端、芯上的视觉计算”的精彩演讲。孙剑认为，计算机视觉简单讲就是使机器能看，旷视科技希望能够做到“赋能亿万摄像头”，让应用在所有领域的摄像头都具备智能，不管是在云、端还是在芯上。</p>
-        </td>
-      </tr>
-    </tbody>
-              </table>
-          </div>
+
+                    <div id="field_news">
+
+                    </div>
+
+                </div>
             </div>
 
         </div>
@@ -640,8 +612,32 @@
         // 使用刚指定的配置项和数据显示图表。
         myChart7.setOption(option7);
 
+           //新闻更新
+           var titles={{titles|safe}};
+           var times={{times|safe}};
+           var urls={{urls|safe}};
+           var briefs={{briefs|safe}};
+           news_num=titles.length
+           for(var i=0;i<news_num;i++){
+                var node=document.createElement("div");
+                var textnode=document.createElement("a");
+                textnode.href=urls[i];
+                textnode.text=titles[i];
 
+                pnode=document.createElement("p");
+                var textnode2=document.createTextNode(briefs[i]);
+                pnode.appendChild(textnode2);
 
+                timenode=document.createElement("p");
+                var textnode3=document.createTextNode(times[i]);
+                timenode.appendChild(textnode3);
+
+                node.appendChild(textnode);
+                node.appendChild(timenode);
+                node.appendChild(pnode);
+                //将node里面获取的子节点 添加到mylisf1里面
+                document.getElementById("field_news").appendChild(node);
+            }
 
 
           </script>

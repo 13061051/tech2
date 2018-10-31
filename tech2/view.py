@@ -4,7 +4,7 @@
 from django.shortcuts import render
 
 import json
-
+import TechNews
 def getLocation():
     with open("data/location.json", 'r',encoding='utf-8') as load_f:
         load_dict = json.load(load_f)
@@ -206,6 +206,21 @@ def hot_academic(request):
     word=request.GET.get('field')
     context={}
     context['field']="'"+word+"'"
+    news=TechNews.getTechNews(field=word)
+    news=news[0:5]
+    titles=[info['title'] for info in news]
+    times = [info['time'] for info in news]
+    urls = [info['url'] for info in news]
+    briefs=[]
+    for info in news:
+        text=info['text']
+        if len(text)>100:
+            text=text[0:100]+"......"
+        briefs.append(text)
+    context['titles']=titles
+    context['urls']=urls
+    context['briefs']=briefs
+    context['times']=times
     return render(request, 'hot_academic_research.html',context)
 def Index(request):
     return render(request, 'new_home/mainpage.html')
