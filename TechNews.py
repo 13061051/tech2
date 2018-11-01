@@ -66,3 +66,26 @@ def getWordCloud(field):
         }
         ]
     return data
+def getIndex(field):
+    #从领域计算三个指数
+    index=[50,50,50]
+    if field=="人工智能":
+        index=[80,80,90]
+    elif field=="数据挖掘":
+        index=[78,78,89]
+    elif index=='无人驾驶':
+        index=[89,78,88]
+    else:
+        index=[50,50,50]
+    return index
+def getScholars(field):
+    #从领域获取专家
+    names = ['周志华', '孙剑', '姜远', '詹德川', '叶翰嘉']
+    links = ['CN-BP75S7TJ', 'CN-BA743W3J', 'CN-BN75FVXJ', 'CN-BV74A6TJ', 'CN-BD84LR9J']
+    if field=="人工智能":
+        names= ['周志华', '孙剑', '姜远', '詹德川', '叶翰嘉']
+        links = ['CN-BP75S7TJ', 'CN-BA743W3J', 'CN-BN75FVXJ', 'CN-BV74A6TJ', 'CN-BD84LR9J']
+    elif field=="数据挖掘":
+        names = ['马少平', '张敏', '刘奕群', '茹立云', 'CN-BW73ZHLJ']
+        links = ['CN-B574A18J', 'CN-BJ73VXDJ', 'CN-BI73XDFJ', 'CN-B875E9HJ', 'CN-BW73ZHLJ']
+    return names,links

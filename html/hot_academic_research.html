@@ -89,11 +89,13 @@
                 </div>
      <script>
          //学术发展程度 静态数据
+
+         var index={{index|safe}}
          var xueshufazhan_data;
-         
+
          xueshufazhan_data = [
-             {value: 10, itemStyle: {color: '#FFFFFF'}},
-             {value: 90, itemStyle: {color: '#2828FF'}}              //百分比
+             {value: 100-index[0], itemStyle: {color: '#FFFFFF'}},
+             {value: index[0], itemStyle: {color: '#2828FF'}}              //百分比
          ];
         // 基于准备好的dom，初始化echarts实例
         var myChart1 = echarts.init(document.getElementById('main1'));
@@ -139,8 +141,8 @@
         //成果丰硕程度 静态数据
          var chengguofengshuo_data;
          chengguofengshuo_data = [
-             {value: 30, itemStyle: {color: '#FFFFFF'}},
-             {value: 70, itemStyle: {color: '#01B468'}}         //百分比
+             {value: 100-index[1], itemStyle: {color: '#FFFFFF'}},
+             {value: index[1], itemStyle: {color: '#01B468'}}         //百分比
          ];
         // 基于准备好的dom，初始化echarts实例
         var myChart2 = echarts.init(document.getElementById('main2'));
@@ -186,8 +188,8 @@
         //社会影响程度 静态数据
         var shehuiyingxiang_data;
         shehuiyingxiang_data = [
-                {value:40,itemStyle: { color: '#FFFFFF' }},
-                {value:60,itemStyle: { color: '#CC0000' }}  //百分比
+                {value:100-index[2],itemStyle: { color: '#FFFFFF' }},
+                {value:100-index[2],itemStyle: { color: '#CC0000' }}  //百分比
             ];
         // 基于准备好的dom，初始化echarts实例
         var myChart3 = echarts.init(document.getElementById('main3'));
@@ -471,7 +473,7 @@
 
     <!-- 学术领袖部分 -->
     <div class="card">
-        <div class="card-header">该领域的学术领袖</div>
+        <div class="card-header">该领域学术专家</div>
         <div class="card-body">
             <div class="row">
             <div class="col-6">
@@ -535,6 +537,7 @@
             }
             ]
            // 基于准备好的dom，初始化echarts实例
+        /*
         var myChart7 = echarts.init(document.getElementById('main7'));
         // 指定图表的配置项和数据
         option7 = {
@@ -567,7 +570,55 @@
 
         // 使用刚指定的配置项和数据显示图表。
         myChart7.setOption(option7);
+			*/
+			//回执专家画像
+			//
+			var scholars={{scholars|safe}};
+			var scholars_urls={{scholars_urls|safe}};
+			var root_node=document.getElementById("main7");
 
+			var scholar_nums=scholars.length;
+			var table_node=document.createElement("table");
+			table_node.align="center"
+			table_node.width="450"
+			table_node.height="300"
+			for(var i=0;i<2;i++){
+				var tr=document.createElement("tr");
+				tr.height="100"
+				tr.width="150";
+				tr.align="center";
+				for(var j=0;i*3+j<scholar_nums && j<3;j++){
+					var td=document.createElement("td");
+					td.height="100";
+					td.width="150";
+					var imgnode=document.createElement("img");
+					imgnode.src="/static/img/zhouzhihua.jpg";
+					imgnode.width=100;
+					imgnode.height=100;
+					td.appendChild(imgnode);
+					
+					tr.appendChild(td);
+				}
+				table_node.appendChild(tr);
+
+
+				var tr=document.createElement("tr");
+				tr.height="50"
+				tr.width="150";
+				tr.align="center"
+				for(var j=0;i*3+j<scholar_nums && j<3;j++){
+					var td=document.createElement("td");
+					var linknode=document.createElement("a");
+					linknode.href="http://xueshu.baidu.com/scholarID/"+scholars_urls[i*3+j];
+					linknode.text=scholars[i*3+j];
+					td.appendChild(linknode);
+					tr.appendChild(td);
+				}
+				table_node.appendChild(tr);
+
+			}
+
+			root_node.appendChild(table_node);
            //新闻更新
            var titles={{titles|safe}};
            var times={{times|safe}};

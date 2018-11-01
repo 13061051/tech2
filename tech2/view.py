@@ -222,6 +222,11 @@ def hot_academic(request):
     context['briefs']=briefs
     context['times']=times
     context['wordcloud']=TechNews.getWordCloud(field=word);
+    context['index']=TechNews.getIndex(field=word)
+    names,links=TechNews.getScholars(word)
+    context['scholars']=names
+    context['scholars_urls'] = links
+
     return render(request, 'hot_academic_research.html',context)
 def Index(request):
     return render(request, 'new_home/mainpage.html')
